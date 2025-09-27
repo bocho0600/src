@@ -1,0 +1,50 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="WaypointNavigation">
+      
+      <!-- Load waypoints from YAML file -->
+      <LoadWaypoints file="{waypoint_file}" waypoints="{waypoint_list}"/>
+      
+      <!-- Main waypoint navigation loop -->
+      <Repeat num_cycles="-1" name="WaypointLoop">
+        <Sequence name="NavigateToWaypoint">
+          
+          <!-- Get next waypoint from the list -->
+          <GetNextWaypoint 
+            waypoints="{waypoint_list}" 
+            current_index="{wp_index}" 
+            goal="{current_goal}"
+            loop="true"/>
+          
+          <!-- Navigate to the current waypoint -->
+          <Sequence name="NavigationSequence">
+            
+            <!-- Compute path to goal -->
+            <ComputePathToPose 
+              goal="{current_goal}" 
+              path="{path}" 
+              planner_id="GridBased"/>
+            
+            <!-- Follow the computed path -->
+            <FollowPath 
+              path="{path}" 
+              controller_id="FollowPath"/>
+            
+          </Sequence>
+          
+        </Sequence>
+      </Repeat>
+      
+    </Sequence>
+  </BehaviorTree>
+</root> 
+        name="load_waypoints" 
+        file="{waypoint_file}" 
+        waypoints="{waypoint_list}"/>
+      
+      <!-- Use Nav2's FollowWaypoints behavior -->
+      <FollowWaypoints waypoints="{waypoint_list}"/>
+      
+    </Sequence>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,5 @@
+<library path="libcustom_bt_nodes">
+  <class type="LoadWaypoints" base_class_type="BT::ActionNodeBase">
+    <description>Load waypoints from a YAML file</description>
+  </class>
+</library>
