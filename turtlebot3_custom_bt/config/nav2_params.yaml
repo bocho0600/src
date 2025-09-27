@@ -110,10 +110,10 @@ controller_server:
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.4
-      vx_max: 0.5
+      vx_max: 0.8  # Increased from 0.5 m/s
       vx_min: -0.35
       vy_max: 0.5
-      wz_max: 1.9
+      wz_max: 2.5  # Increased from 1.9 rad/s
       iteration_count: 1
       prune_distance: 1.7
       transform_tolerance: 0.1
@@ -341,9 +341,9 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: False
     feedback: "OPEN_LOOP"
-    max_velocity: [0.5, 0.0, 2.0]
+    max_velocity: [0.8, 0.0, 2.5]  # [linear_x, linear_y, angular_z]
     min_velocity: [-0.5, 0.0, -2.0]
-    max_accel: [2.5, 0.0, 3.2]
+    max_accel: [3.5, 0.0, 4.0]  # Faster acceleration
     max_decel: [-2.5, 0.0, -3.2]
     odom_topic: "odom"
     odom_duration: 0.1
